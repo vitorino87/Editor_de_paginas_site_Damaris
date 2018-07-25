@@ -55,7 +55,9 @@ public class ClasseParaAbrirEditarSalvarArquivos {
                     text = "";
                 }
             }
-            processarLinha(text, arquivoParaSalvar);
+            if(text!=""){
+                processarLinha(text, arquivoParaSalvar);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
