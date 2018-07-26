@@ -23,7 +23,7 @@ public class ClasseParaAbrirEditarSalvarArquivos {
 
     private static final int POSICAO_DO_CARACTERE_A_SER_PROCURADO = 2;
     private static final char CARACTERE_A_SER_PROCURADO = ')';
-    private static final char ULTIMA_ALTERNATIVA_DE_CADA_QUESTAO = 'D';
+    private static final char ULTIMA_ALTERNATIVA_DE_CADA_QUESTAO = 'E';
     private static final int POSICAO_DA_LETRA_DA_ULTIMA_QUESTAO = 1;
     private static final int POSICAO_DA_LETRA_DA_ALTERNATIVA = 1;
     private int nome_do_input_radio;
@@ -50,8 +50,19 @@ public class ClasseParaAbrirEditarSalvarArquivos {
             int contador = 0;
             String auxiliadorDeTexto = "";
             //String resposta = "";
-            String text = "";
+            //String text = "";
             File arquivoParaSalvar = selecionarLocalParaSalvar();
+            String text="<head>\n" +
+"<title>SUBSTITUA-ME</title>\n" +
+"<meta charset=\"utf-8\">\n" +
+"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+"<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n" +
+"<link rel=\"stylesheet\" href=\"https://tiagovitorino.000webhostapp.com/damaris/css/stylesheet.css\">\n" +
+"</head>\n" +
+"<div class=\"w3-row-padding\">\n"
++"<img src=\" \" alt=\"questao1\" style=\"width:100%\">\n";
+            salvarLinhasProcessadas(arquivoParaSalvar.getAbsolutePath(),text);
+            text="";
             nome_do_input_radio = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o nome do input radio inicial:"));
             while ((ch = isr.read()) != -1) {
                 if (ch != 13) {
@@ -66,7 +77,39 @@ public class ClasseParaAbrirEditarSalvarArquivos {
             }
             if(!text.equals("")){                
                 processarLinha(text, arquivoParaSalvar);
-            }
+            }            
+            text="\n</div>\n" +
+"<script src=\"\">\n" +
+"function myFunction(n) \n" +
+"{\n" +
+"    var s = \"\"+n; /*serve para transformar o número q em String*/\n" +
+"    var r = ['C', 'A', 'B', 'A', 'D','C','A','D','B','A','B','A','B'];  /*respostas*/\n" +
+"    var x = document.getElementsByName(s);\n" +
+"    var i;\n" +
+"    var verificadorDeQuestaoCorreta = false;\n" +
+"    for (i = 0; i < x.length; i++) \n" +
+"    {\n" +
+"      //alert(i);\n" +
+"      //alert(x[i].checked);\n" +
+"      if(x[i].checked == true)\n" +
+"      {\n" +
+"           //alert(r[s-1]);\n" +
+"           if(x[i].value==r[s-1])\n" +
+"           {\n" +
+"              alert(\"Damaris, você acertou!\");\n" +
+"              verificadorDeQuestaoCorreta = true;\n" +
+"           }\n" +
+"       }\n" +
+"    }\n" +
+"    if(!verificadorDeQuestaoCorreta){\n" +
+"        alert(\"Damaris, você errou! Tente outra vez! ;)\")\n" +
+"    }\n" +
+"    \n" +
+"\n" +
+"    //alert(\"Questões corretas: \"); \n" +
+"}\n"
+                    + "</script>";
+            salvarLinhasProcessadas(arquivoParaSalvar.getAbsolutePath(),text);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
@@ -105,7 +148,7 @@ public class ClasseParaAbrirEditarSalvarArquivos {
 
         }
 
-    }
+    }    
 
     public File selecionarLocalParaSalvar() {
         JFileChooser fc = new JFileChooser();
@@ -121,4 +164,6 @@ public class ClasseParaAbrirEditarSalvarArquivos {
         }
         return file;
     }
+    
+    
 }
